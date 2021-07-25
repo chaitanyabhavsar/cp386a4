@@ -10,6 +10,9 @@ In this assignment, we will try to practice the concept of deadlokc avoidance. W
 
 ## Installation 
 
+- Visual Studio Code to write code
+- Linux virtual machine to test code
+
 ## Screenshots 
 
 ## Individual Contribution (Function Wise)
@@ -21,9 +24,8 @@ In this assignment, we will try to practice the concept of deadlokc avoidance. W
 ## Code Example
 
 ## Authors
-
-Authors: Sukhjit Singh Sehra 
-Contributors: Chaitanya Bhavsar & Jiten Aylani
+- Chaitanya Bhavsar 
+- Jiten Aylani
 
 ## Credits
 
