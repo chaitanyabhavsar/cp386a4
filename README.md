@@ -1,13 +1,12 @@
 # Assignment 4
 
-Authors: Sukhjit Singh Sehra 
-Contributors: Chaitanya Bhavsar & Jiten Aylani
-
-
-
 ## Project Title
 
+CP386: Assignment 4 - Spring 2020
+
 ## Motivation
+
+In this assignment, we will try to practice the concept of deadlokc avoidance. We will write a multiple threaded program that implements the banker's algorithm. 
 
 ## Installation 
 
@@ -21,7 +20,10 @@ Contributors: Chaitanya Bhavsar & Jiten Aylani
 
 ## Code Example
 
-## Authors 
+## Authors
+
+Authors: Sukhjit Singh Sehra 
+Contributors: Chaitanya Bhavsar & Jiten Aylani
 
 ## Credits
 
