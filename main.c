@@ -91,7 +91,7 @@ void *runTh(void *l){
     int *clnttkr = (int *)l; 
     
     printf("\tAllocated Resources:\t");
-	for (int c = 0; c < custom->data_length-1; c++)
+	for (int c = 0; c < custom->data_length; c++)
 		printf("%d ", alloc[*clnttkr][c]);
 	
 
@@ -99,14 +99,14 @@ void *runTh(void *l){
 
 
    	printf("\tNeeded:\t");
-    for (int v = 0; v < custom->data_length -1; v++){
+    for (int v = 0; v < custom->data_length; v++){
         printf("%d ", needed[*clnttkr][v]);
     }
 	printf("\n");
 
 
     printf("\tAvailable:\t");
-    for (int v = 0; v < custom->data_length -1 ; v++){
+    for (int v = 0; v < custom->data_length; v++){
         printf("%d ", avail[v]);
     }
 
@@ -121,8 +121,8 @@ void *runTh(void *l){
 
 	printf("\tNew Available:\t");
     
-	for (int v =0; v < custom->data_length - 1; v++){
-        avail[v] =  avail[v+1] + alloc[*clnttkr][v];
+	for (int v =0; v < custom->data_length; v++){
+        avail[v] =  avail[v] + alloc[*clnttkr][v];
         printf("%d ", avail[v]);
     }
 
