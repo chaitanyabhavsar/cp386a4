@@ -5,8 +5,8 @@
  
  -------------------------------------
  Author:  Jiten Aylani, Chaitanya Bhavsar
- ID:      190469460 , 
- Email:   ayla9460@wlu.ca , 
+ ID:      190469460 , 190427300 
+ Email:   ayla9460@mylaurier.ca , bhav7300@mylaurier.ca
  Version  2021/07/26
  -------------------------------------
  */
