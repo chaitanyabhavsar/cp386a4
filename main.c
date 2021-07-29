@@ -13,7 +13,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <pthread.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <semaphore.h>
 typedef struct cst {
     int csts;
     int data_length;
@@ -24,10 +27,14 @@ int **needed;
 
 Cst *custom;
 
+int customCnt(char *fl);
+void neededCnt(int x, int y, int **alloc, int max[x][y], int **needed);
+void currReCnt();
 int banker(int q, int w, int **alloc, int max[q][w], int avail[q], int **needed, int temparr[w]);
 void *runTh(void *l);
 
-
+int main(int argc, char *argv[]){
+}
 int banker(int q, int w, int **alloc, int max[w][q], int avail[q], int **needed, int temparr[w]){
     int d, s, u;
     int sSeq = 1;
@@ -86,6 +93,54 @@ int banker(int q, int w, int **alloc, int max[w][q], int avail[q], int **needed,
 
     return 0;
 }
+void currReCnt() {
+
+    int tmprpy; 
+    int tmprpy2;
+
+    for (int k = 0; k < custom->data_length; k++) { 
+        tmprpy = 0;
+
+        for (int m = 0; m < custom->csts; m++) { 
+            tmprpy = tmprpy + alloc[m][k];
+        }
+
+        tmprpy2 = avail[k] - tmprpy;
+        avail[k] = tmprpy2;
+    }
+}
+
+int customCnt(char *fl) {
+	
+	FILE *pointer;
+    int cnt = 0;
+    char n;
+ 
+    pointer = fopen(fl, "r");
+
+    n = getc(pointer);
+    
+	while (n != EOF)
+    {
+		
+        if (n == '\n')
+            cnt++;
+
+        n = getc(pointer);
+    }
+
+    fclose(pointer);
+    return cnt;
+}
+
+void neededCnt(int x, int y, int **alloc, int max[y][x], int **needed) {
+	for (int k = 0; k < y; k++) { 
+        	for (int l = 0; l < x; l++) { 
+            		needed[k][l] = max[k][l] - alloc[k][l];
+        	}
+	}
+}
+
 void *runTh(void *l){
 
     int *clnttkr = (int *)l; 
@@ -131,3 +186,6 @@ void *runTh(void *l){
 	return NULL;
 
 }
+
+
+
