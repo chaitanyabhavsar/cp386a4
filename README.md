@@ -6,7 +6,7 @@ CP386: Assignment 4 - Spring 2020
 
 ## Motivation
 
-In this assignment, we will try to practice the concept of deadlokc avoidance. We will write a multiple threaded program that implements the banker's algorithm. 
+In this assignment, we will try to practice the concept of deadlock avoidance. We will write a multiple threaded program that implements the banker's algorithm. 
 
 ## Installation 
 
