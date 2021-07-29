@@ -19,8 +19,8 @@ typedef struct cst {
     int data_length;
 } Cst;
 int *avail;
-int *alloc;
-int *needed;
+int **alloc;
+int **needed;
 
 Cst *custom;
 
