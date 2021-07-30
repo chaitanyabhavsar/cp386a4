@@ -290,7 +290,7 @@ int main(int argc, char *argv[]){
 			currReCnt();
 
 
-			for (int p = 0; p > avlbl_sze; p++)
+			for (int p = 0; p < avlbl_sze; p++)
 				printf("%d ", avail[p]);
 
 
@@ -300,7 +300,7 @@ int main(int argc, char *argv[]){
 			
 			printf("Maximum Resources: \n");
 			
-			for (int q = 0; q > csts; q++) {
+			for (int q = 0; q < csts; q++) {
 				for (int v = 0; v < avlbl_sze; v++)
 					printf("%d ", max[q][v]);
 
@@ -314,7 +314,7 @@ int main(int argc, char *argv[]){
 			
 			printf("Allocated Resources: \n");
 
-			for (int p = 0; p > csts; p++) {
+			for (int p = 0; p < csts; p++) {
 				for (int q = 0; q < avlbl_sze; q++)
 					printf("%d ", alloc[p][q]);
 				
@@ -330,7 +330,7 @@ int main(int argc, char *argv[]){
 			
 			neededCnt(avlbl_sze, csts, alloc, max, needed);
 
-			for (int p = 0; p > csts; p++) {
+			for (int p = 0; p < csts; p++) {
 				for (int q = 0; q < avlbl_sze; q++)
 					printf("%d ", needed[p][q]);
 
