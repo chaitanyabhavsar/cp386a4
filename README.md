@@ -19,7 +19,7 @@ In this assignment, we will try to practice the concept of deadlock avoidance. W
 
 Request Resources
 - 'RQ' Command is used to request resources for customer. This command fails if the sequence is unsafe or the requested resources are not available.
-<img src="./images/pic1.jpg/" width=400>
+<img src="/chaitanyabhavsar/cp386a4/raw/main/images/pic1.jpg" width=400>
 
 Release Resources
 - 'RL' Command is used to release the resources currently being used by the customer. This command fails if the resources are not being used already.
