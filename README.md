@@ -58,7 +58,9 @@ Exit
 - Jiten Aylani
 
 ## Credits
-
+- <a href="https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/">Banker's Algorithm in Operating System</a>
+- <a href="https://www.youtube.com/watch?v=2V2FfP_olaA">Banker's Algorithm for deadlock avoidance | an example</a>
 ## License 
+<a href="https://github.com/chaitanyabhavsar/cp386a4/blob/main/LICENSE">Project Licence</a>
 
 
