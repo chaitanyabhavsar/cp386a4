@@ -376,7 +376,9 @@ int main(int argc, char *argv[]){
 
 
 }
+// This function is created for the Bankers Algorithm
 int banker(int q, int w, int **alloc, int max[w][q], int avail[q], int **needed, int temparr[w]){
+    // Declare init variables
     int d, s, u;
     int sSeq = 1;
 
@@ -391,7 +393,7 @@ int banker(int q, int w, int **alloc, int max[w][q], int avail[q], int **needed,
         {
             if (n[d] == 0)
             {
-
+                // declare indicator as flag
                 int indicator = 0;
                 for (s = 0; s < q; s++)
                 {
@@ -414,31 +416,32 @@ int banker(int q, int w, int **alloc, int max[w][q], int avail[q], int **needed,
             }
         }
     }
-
+    // Obtain safe sequence
     for (d = 0; d < w; d++)
     {
         if (n[d] == 0)
             sSeq = 0;
     }
-
+    // If safe sequence is not valid, return -1
     if (sSeq == 0)
         return -1;
-
+    // Print the safe sequence
     printf("Safe Sequence is: <");
 
     for (d = 0; d < w - 1; d++)
         printf("%d ", temparr[d]);
 
     printf("%d>\n", temparr[w - 1]);
-	printf("Now going to executing the threads:\n\n\n");
+    printf("Now going to executing the threads:\n\n\n");
 
     return 0;
 }
+// This function calculates the current existing resources
 void currReCnt() {
-
+    // Declare temporary variables
     int tmprpy; 
     int tmprpy2;
-
+    
     for (int k = 0; k < custom->data_length; k++) { 
         tmprpy = 0;
 
@@ -451,30 +454,32 @@ void currReCnt() {
     }
 }
 
+// This function would obtain the times new line has occured in the file
 int customCnt(char *fl) {
-	
-	FILE *pointer;
+    // declaring vars, integer cnt, and character n
+    FILE *pointer;
     int cnt = 0;
     char n;
- 
+    // open fl
     pointer = fopen(fl, "r");
-
+    // Obtain the characters from the file pointer and save in 'n'
     n = getc(pointer);
     
 	while (n != EOF)
     {
-		
+	// increment count when new line is there
         if (n == '\n')
             cnt++;
 
         n = getc(pointer);
     }
-
+    // close file
     fclose(pointer);
-    return cnt;
+    return cnt; // return the number of new lines in the file
 }
-
+// This function obtains the number of resources needed.
 void neededCnt(int x, int y, int **alloc, int max[y][x], int **needed) {
+	// the nested for loop creates the needed resources matrix.
 	for (int k = 0; k < y; k++) { 
         	for (int l = 0; l < x; l++) { 
             		needed[k][l] = max[k][l] - alloc[k][l];
@@ -482,10 +487,11 @@ void neededCnt(int x, int y, int **alloc, int max[y][x], int **needed) {
 	}
 }
 
+// This function is made for running thread
 void *runTh(void *l){
 
     int *clnttkr = (int *)l; 
-    
+    // Prints allocated reosources
     printf("\tAllocated Resources:\t");
 	for (int c = 0; c < custom->data_length; c++)
 		printf("%d ", alloc[*clnttkr][c]);
@@ -493,20 +499,20 @@ void *runTh(void *l){
 
 	printf("\n");
 
-
-   	printf("\tNeeded:\t");
+    // Prints needed resources
+    printf("\tNeeded:\t");
     for (int v = 0; v < custom->data_length; v++){
         printf("%d ", needed[*clnttkr][v]);
     }
-	printf("\n");
+    printf("\n");
 
-
+    // prints availale resources
     printf("\tAvailable:\t");
     for (int v = 0; v < custom->data_length; v++){
         printf("%d ", avail[v]);
     }
 
-
+    // New line
     printf("\n");
 
 
@@ -514,17 +520,16 @@ void *runTh(void *l){
     printf("\tThread has finished\n");
     printf("\tThread is realeasing resources\n");
     
-
-	printf("\tNew Available:\t");
+    // Prints newly available resources
+    printf("\tNew Available:\t");
     
-	for (int v =0; v < custom->data_length; v++){
-        avail[v] =  avail[v] + alloc[*clnttkr][v];
+    for (int v =0; v < custom->data_length; v++){
+    	avail[v] =  avail[v] + alloc[*clnttkr][v];
         printf("%d ", avail[v]);
     }
 
     printf("\n");
-	
-	return NULL;
+    return NULL;
 
 }
 
