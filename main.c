@@ -179,7 +179,7 @@ int main(int argc, char *argv[]){
 	printf("\n");
     }
 
-//init variables    
+//init variables for the character arrays (command string)
     char strngtn[LIMIT];
     char cmp[LIMIT];
     char rqrd[LIMIT] = "RQ";
@@ -188,13 +188,13 @@ int main(int argc, char *argv[]){
     char runtn[LIMIT] = "Run\n";
     char extprog[LIMIT] = "exit\n";
 
-    
+//print statement for asking for initial request to initially run while loop 
     printf("Enter Command: ");
     fgets(strngtn, LIMIT, stdin);
     strcpy(cmp, strngtn);
     int kaambhari = 0;
 
-        
+//programs the main logic when the exit has not been initiated         
     while (strcmp(cmp, extprog) != 0) {
         if (kaambhari > 0) {
             printf("Enter Command: ");
@@ -202,18 +202,19 @@ int main(int argc, char *argv[]){
             strcpy(cmp, strngtn);
         }
 
-		
+	//we are bound to be string spilliting in such conditionals 	
 	int fnl_strng = 0;
 	for (int v = 0; cmp[v] != '\0'; v++) {
 		if (cmp[v] == ' ' || cmp[v] == '\n' || cmp[v] == '\t')
 			fnl_strng++;
 	}
 
-        
+        //initalize the parsing of the logic
         char *tknt = strtok(cmp, " ");
 	char *inpt_strng[LIMIT];
-		
+	//init	
 	int p =0;
+	//if conditional    
 	if (fnl_strng >= 2) {
             while (tknt != NULL && p <= csts) {
                 inpt_strng[p] = tknt;
@@ -221,128 +222,129 @@ int main(int argc, char *argv[]){
 		p+= 1;
 	    }
 	}
-
+	//else conditional 
         else
 		strcpy(inpt_strng[0], cmp);
-		
+	//init	
 	int strng_lngth = p;
 	p = 0;
-
+	//end of parsing in such 
         
-
+	//we will have COMMAND: resource request in such
         if (strcmp(inpt_strng[0], rqrd) == 0) {
-		if (atoi (inpt_strng[1]) >= csts) { 
-			printf("Index cannot be greater than customers\n");
+		if (atoi (inpt_strng[1]) >= csts) { //idiot proofing of the resource request command
+			printf("Index cannot be greater than customers\n"); //print statement + continuation 
 		}
+		//else conditional
+		else { 
+			for (int n = 2; n < (strng_lngth); n++) //for conditional to store req resource data
+				alloc[atoi(inpt_strng[1])][n-2] = atoi(inpt_strng[n]); //convert alloc resource info from str to int
 
-		else {
-			for (int n = 2; n < (strng_lngth); n++) 
-				alloc[atoi(inpt_strng[1])][n-2] = atoi(inpt_strng[n]); 
-
-				printf("State is safe, and request is satisfied\n");
+				printf("State is safe, and request is satisfied\n"); //print statement
 		}
 	}
 
 
-        
+        //else conditional for command resource release 
 	else if (strcmp(inpt_strng[0], rels) == 0) {
-        	int fnsh_flg; 
+        	int fnsh_flg; //init the request release not satisfied val
 
-		if (atoi (inpt_strng[1]) >= csts) {
-			printf("Index cannot be greater than customers\n");
+		if (atoi (inpt_strng[1]) >= csts) { //idiot proof for resource req
+			printf("Index cannot be greater than customers\n");//print statement + continuation
 				
 		}
-
+		//else conditional
 		else {
-
+			//for conditional
 			for (int d = 2; d < (strng_lngth); d++) {
-				int rls_val;
-				rls_val = alloc[atoi(inpt_strng[1])][d - 2] - atoi(inpt_strng[d]); 
+				int rls_val; //int 
+				rls_val = alloc[atoi(inpt_strng[1])][d - 2] - atoi(inpt_strng[d]); //calc the release val from alloc  two dimensional array
 
-				if (rls_val < 0) { 
-					printf("unknown release\n");
-					fnsh_flg = 1; 
-					break;
+				if (rls_val < 0) { //idiot proof the resource releast, to avoid alloc res val below null zero
+					printf("unknown release\n");//print
+					fnsh_flg = 1; //init
+					break;//break
 				}
 					
-				else
-					alloc[atoi(inpt_strng[1])][d - 2] = rls_val; 
+				else //else conditional
+					alloc[atoi(inpt_strng[1])][d - 2] = rls_val; //changing the location of val for the pointed rel val at current time
 
 				if ((d = strng_lngth - 1))
 					printf("Release is satisfied\n");
 				}
 
 				
-
-			if (fnsh_flg == 1)
-				continue;
+			//we will leave the loop to start over from while as we reject value of what we have put in
+			if (fnsh_flg == 1) //if conditional 
+				continue; //continue
 		}
         }
 
         
-	
+	//else if conditional for command at display detail
 	else if (strcmp(inpt_strng[0], strng) == 0) {
-		printf("Available Resources: ");
+		printf("Available Resources: "); //print the currently avail resource
 
 		currReCnt();
 
-
+		//for conditional
 		for (int p = 0; p < avlbl_sze; p++)
 			printf("%d ", avail[p]);
 
-
+		//print line
 		printf("\n\n");
 			
 
-			
+		//print the maximum amount of resources
 		printf("Maximum Resources: \n");
-			
+		//for loop
 		for (int q = 0; q < csts; q++) {
 			for (int v = 0; v < avlbl_sze; v++)
-				printf("%d ", max[q][v]);
+				printf("%d ", max[q][v]); //print statement
 
-			printf("\n");
+			printf("\n"); //print statement
 		}
 
 
-		printf("\n");
+		printf("\n"); //print line 
 
 
 			
-		printf("Allocated Resources: \n");
-
+		printf("Allocated Resources: \n"); //print the allocated resources in such
+		//for conditional
 		for (int p = 0; p < csts; p++) {
 			for (int q = 0; q < avlbl_sze; q++)
-				printf("%d ", alloc[p][q]);
+				printf("%d ", alloc[p][q]); //print val 
 				
-			printf("\n");
+			printf("\n"); //print line
         	}
 
 
-		printf("\n");
+		printf("\n"); //print line
 		
 
 			
-		printf("Need Resources: \n");
+		printf("Need Resources: \n"); //print the need resources
 			
 		neededCnt(avlbl_sze, csts, alloc, max, needed);
 
 		for (int p = 0; p < csts; p++) {
 			for (int q = 0; q < avlbl_sze; q++)
-				printf("%d ", needed[p][q]);
+				printf("%d ", needed[p][q]); //print the val
 
-			printf("\n");
+			printf("\n"); //print line
 		}
 
-			printf("\n");
+			printf("\n"); //print line
 	}
 
         
-        		
+        //else statement + command run of the threads to find a safe seq
 	else if (strcmp(inpt_strng[0], runtn) == 0) {
-			
+		printf("Executing run command\n"); //print command
+		
 		neededCnt(avlbl_sze, csts, alloc, max, needed);
-		int rspnd = banker(avlbl_sze, csts, alloc, max, avail, needed, temparr);
+		int rspnd = banker(avlbl_sze, csts, alloc, max, avail, needed, temparr); //init
 			
 		if (rspnd != 0) {
 			printf("Could not find Safe sequence\n");
@@ -351,26 +353,26 @@ int main(int argc, char *argv[]){
 
 		for (int t = 0; t < csts; t++) {
 			int idxfd = temparr[t];
-			printf("--> Customer/Thread %d\n", idxfd);
+			printf("--> Customer/Thread %d\n", idxfd); //print customer thread val
 				
-				
+			//running the thread
 			pthread_t tid;
 			pthread_create(&tid, NULL, runTh, &idxfd);
 			pthread_join(tid, NULL);
 		}
 	}
 		
-	kaambhari += 1;
+	kaambhari += 1; //+=1 to work field
     }
 
 
 
-	
+	//we have put in the free dynamic stored val of the data
 	free(avail);
 	free(alloc);
 	free(needed);
 
-	return 0;
+	return 0; //return val
 
 
 }
