@@ -10,6 +10,7 @@
  Version  2021/07/26
  -------------------------------------
  */
+//initilization 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,10 +18,14 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <semaphore.h>
+
+//init of the interface
 typedef struct cst {
     int csts;
     int data_length;
 } Cst;
+
+//initilization of the variables in accordance to pointer
 int *avail;
 int **alloc;
 int **needed;
@@ -29,27 +34,30 @@ Cst *custom;
 
 #define LIMIT 200
 
+//definitions 
 int customCnt(char *fl);
 void neededCnt(int x, int y, int **alloc, int max[x][y], int **needed);
 void currReCnt();
 int banker(int q, int w, int **alloc, int max[q][w], int avail[q], int **needed, int temparr[w]);
 void *runTh(void *l);
 
+
+//main function
 int main(int argc, char *argv[]){
-    if (argc < 2) { 
-	    printf("Error - missing data for 'available' resources\n");
-	    return -1; 
+    if (argc < 2) { //if loop
+	    printf("Error - missing data for 'available' resources\n");//print
+	    return -1; //return statement
     }
 	
-    int avlbl_sze = argc - 1;
+    int avlbl_sze = argc - 1; //init variable. this will calculate the available size
 
 
     
-    int csts = customCnt("sample4_in.txt") + 1;
-    printf("Number of Customers: %d\n", csts);
+    int csts = customCnt("sample4_in.txt") + 1; //initilization of variable to find the given csts (customers) in a file and to return it in such a manner. 
+    printf("Number of Customers: %d\n", csts);//print statement
 
 
-   
+   //where we are initliazating the arrays in accordance to the pointer values and location of the variable. 
     custom = (Cst*)malloc(sizeof(Cst));
     custom->data_length = avlbl_sze;
     custom->csts = csts;
@@ -60,46 +68,47 @@ int main(int argc, char *argv[]){
         return -1;
     }
 
-    
+    //argc values play a role in initializing the array values
     for (int x = 0; x < avlbl_sze; x++) { 
         avail[x] = atoi(argv[x + 1]);
     }
 
-   
+   //allocation of the two dimensional arrays 
     alloc = (int **)malloc(csts * sizeof(int *));
 
     for (int x = 0; x < csts; x++) { 
         alloc[x] = (int *)malloc(avlbl_sze * sizeof(int)); 
     }
 
-    
+    //initliazing the allocation of arrays to a null value of zero
     for (int p = 0; p < csts; p++) { 
         for (int q = 0; q < avlbl_sze; q++) { 
             alloc[p][q] = 0;
         }
     }
 
-    
+    //this portion we will do allocation of the two dimensional array for the portion of code that is needed
     needed = (int **)malloc(csts * sizeof(int *));
 
+//for loop to init
     for (int x = 0; x < csts; x++) { 
         needed[x] = (int *)malloc(avlbl_sze * sizeof(int));
     }
-    int temparr[csts]; 
+    int temparr[csts]; //we will create the temporary array
 
 
     
-    int max[csts][avlbl_sze];
-
+    int max[csts][avlbl_sze];//initialize a maximum array that will be used to read the data from the file and will insert into such
+//for loop conditional that will init the max arrays into null values. 
     for(int p = 0; p < csts; p++) { 
         for(int q = 0; q < avlbl_sze; q++) { 
             max[p][q] = 0;
         }
     }
     
-    
+    //open the file 
     FILE *in = fopen("sample4_in.txt", "r");
-
+//this will check if the file is opened or not. 
     if(!in) { 
 	    printf("Error opening file\n");
 	    return -1;
@@ -110,21 +119,21 @@ int main(int argc, char *argv[]){
     char* fileContent = (char*)malloc(((int) lp.st_size + 1)* sizeof(char));
     fileContent[0]='\0';	
 	
-	
+//storing the data from the file into the filecontent string 
     while(!feof(in)) {
 	    char line[100];
 	    if(fgets(line, 100, in) != NULL)
 		    strncat(fileContent, line, strlen(line));
     }
 
-    fclose(in);
-
+    fclose(in);//close such file
+//init the array vars
     char* lines[csts];
     char *cmmd = NULL;
     int x = 0;
     cmmd = strtok(fileContent,"\r\n");
 
-    
+//whie loop that will basically take the data from the filecontent and store to the lines array    
     while(cmmd!=NULL) {
 	lines[x] = malloc(sizeof(cmmd)*sizeof(char));
 	strcpy(lines[x],cmmd);
@@ -132,12 +141,12 @@ int main(int argc, char *argv[]){
 	cmmd = strtok(NULL,"\r\n");
     }
 
-	
+//for loop that is used to basically take the token of each line and to add the singular numbers to array	
     for(int p = 0; p < csts; p++){
 	char* tkn = NULL;
 	int q = 0;
 	tkn =  strtok(lines[p],",");
-
+//while loop
 	while(tkn!=NULL) {
 		max[p][q] = atoi(tkn);
 		q++;
@@ -146,9 +155,9 @@ int main(int argc, char *argv[]){
     }
 
    
-
+//print statement for the current available resources 
     printf("Currently Available resources:");
-
+//for loop for conditional 
     for (int p = 0; p < avlbl_sze; p++)
 	printf(" %d", avail[p]);
 
@@ -156,9 +165,9 @@ int main(int argc, char *argv[]){
 
 
     
-
+//print statement for the maximum resources from the file 
     printf("Maximum resources from file:\n");
-
+//for loop 
    for (int p = 0; p < csts; p++) {
     	for (int q = 0; q < avlbl_sze; q++) {
 		printf("%d", max[p][q]);
@@ -166,11 +175,11 @@ int main(int argc, char *argv[]){
 		if (q != avlbl_sze - 1)
 			printf(",");
     	}
-
+//print line 
 	printf("\n");
     }
 
-    
+//init variables    
     char strngtn[LIMIT];
     char cmp[LIMIT];
     char rqrd[LIMIT] = "RQ";
