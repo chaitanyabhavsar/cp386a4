@@ -10,8 +10,10 @@ In this assignment, we will try to practice the concept of deadlock avoidance. W
 
 ## Installation 
 
-- Visual Studio Code to write code
-- Linux virtual machine to test code
+- Visual Studio Code
+- Oracle VM Virtual Box
+- GCC Compiler for C
+- Cyberduck
 
 ## Screenshots 
 
