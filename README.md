@@ -50,7 +50,7 @@ Exit
 
 
 ## Sample Test
-*Please see images for screenshots
+*Please see <a href="https://github.com/chaitanyabhavsar/cp386a4/tree/main/images">images</a> for screenshots
 
 ## Authors
 - Chaitanya Bhavsar 
