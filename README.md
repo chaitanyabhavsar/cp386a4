@@ -51,7 +51,7 @@ Exit
 
 
 ## Sample Test
-*Please see <a href="https://github.com/chaitanyabhavsar/cp386a4/tree/main/images">images</a> for screenshots
+*Please see <a href="https://github.com/chaitanyabhavsar/cp386a4/tree/main/images">images</a> for sample test case
 
 ## Authors
 - Chaitanya Bhavsar 
