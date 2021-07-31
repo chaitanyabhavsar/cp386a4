@@ -432,7 +432,6 @@ int banker(int q, int w, int **alloc, int max[w][q], int avail[q], int **needed,
         printf("%d ", temparr[d]);
 
     printf("%d>\n", temparr[w - 1]);
-    printf("Now going to executing the threads:\n\n\n");
 
     return 0;
 }
