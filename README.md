@@ -23,16 +23,16 @@ Request Resources
 
 Release Resources
 - 'RL' Command is used to release the resources currently being used by the customer. This command fails if the resources are not being used already.
-<img src="./images/pic5.jpg/" width=400>
-<img src="./images/Pic6.jpg/" width =200>
+<img src="https://github.com/chaitanyabhavsar/cp386a4/blob/main/images/pic5.JPG" width=400>
+<img src="https://github.com/chaitanyabhavsar/cp386a4/blob/main/images/Pic6.JPG" width =200>
 
 Status
 - 'Status' Command will print arrays and matrices for available, maximum, allocated, and needed resources.
-<img src="./images/pic2.jpg/" width=400>
+<img src="https://github.com/chaitanyabhavsar/cp386a4/blob/main/images/pic2.JPG" width=400>
 
 Run
 - 'Run' command will execute customers as threads in a safe sequence. Each thread requests the resources it needs, releases them, and allows next thread to run.
-<img src="./images/pic3.jpg/" width=400>
+<img src="https://github.com/chaitanyabhavsar/cp386a4/blob/main/images/pic3.JPG" width=400>
 
 Exit
 - 'exit' command will exit the program
