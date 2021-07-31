@@ -15,15 +15,14 @@ In this assignment, we will try to practice the concept of deadlock avoidance. W
 - GCC Compiler for C
 - Cyberduck
 
-## Screenshots 
+## Features
 
 ## Individual Contribution (Function Wise)
 
-## Features
 
-## Tests
 
-## Code Example
+## Sample Test
+
 
 ## Authors
 - Chaitanya Bhavsar 
