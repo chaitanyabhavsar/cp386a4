@@ -17,12 +17,24 @@ In this assignment, we will try to practice the concept of deadlock avoidance. W
 
 ## Features
 
+'RQ' - Request Resources
+
+'RL' - Release Resources
+
 ## Individual Contribution (Function Wise)
 
+| Function | Chaitanya Bhavsar | Jiten Aylani | 
+| ------------- | ------------- | ------------- |
+| int main() |✔️ |  |
+| int banker() |  | ✔️ |
+| void currReCnt() |✔️ |  |
+| int customCnt() |  | ✔️ |
+| void neededCnt() |✔️| ✔️ |
+| void runTh() | ✔️ | ✔️ |
 
 
 ## Sample Test
-
+*Please see images for screenshots
 
 ## Authors
 - Chaitanya Bhavsar 
