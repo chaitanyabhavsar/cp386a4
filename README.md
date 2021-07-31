@@ -30,7 +30,7 @@ In this assignment, we will try to practice the concept of deadlock avoidance. W
 | void currReCnt() |✔️ |  |
 | int customCnt() |  | ✔️ |
 | void neededCnt() |✔️| ✔️ |
-| void runTh() | ✔️ | ✔️ |
+| void *runTh() | ✔️ | ✔️ |
 
 
 ## Sample Test
